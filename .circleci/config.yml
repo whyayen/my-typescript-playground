@@ -1,0 +1,37 @@
+version: 2.1
+commands: 
+  check-skippable-pr:
+    steps:
+      - run: apk add --no-cache bash curl jq
+      - run:
+          name: "What branch am I on?"
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: "What pull request number is?"
+          command: echo ${CIRCLE_PR_NUMBER}
+      - run:
+          name: "What pull request repository name is?"
+          command: echo ${CIRCLE_PR_REPONAME}
+      - run:
+          name: "What pull request user name is?"
+          command: echo ${CIRCLE_PROJECT_USERNAME}
+      - run:
+          name: "What pull request url is?"
+          command: echo ${CIRCLE_PULL_REQUEST}
+      - run:
+          name: "What project reponame is?"
+          command: echo ${CIRCLE_PROJECT_REPONAME}
+      - run:
+          name: "What project username is?"
+          command: echo ${CIRCLE_PROJECT_USERNAME}
+jobs:
+  check-skippable-pr:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - check-skippable-pr
+workflows:
+  check-skippable:
+    jobs:
+      - check-skippable-pr
+
