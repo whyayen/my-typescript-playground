@@ -63,6 +63,7 @@ commands:
               running_jobs=$(echo "${all_jobs}" | jq "map(if .status == \"running\" or .status == \"not_running\"  then .build_num else \"None\" end) - [${SELF_BUILD_NUM}] - [\"None\"] | .[]")
 
               for buildNum in $running_jobs; do
+                echo ${buildNum}
                 printf "Canceling ${buildNum}"
                 curl --silent --show-error --request POST "${CIRCLE_API_BASE_URL}/${buildNum}/cancel?${AUTH_PARAMS}" > /dev/null
               done
