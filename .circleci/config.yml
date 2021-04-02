@@ -10,11 +10,11 @@ commands:
           name: "What pull request user name is?"
           command: echo ${CIRCLE_PROJECT_USERNAME}
       - run:
-          name: "What pull request url is?"
-          command: echo ${CIRCLE_PULL_REQUEST##*/}
+          name: "Set pull request number variable"
+          command: echo 'export PR_NUM="${CIRCLE_PULL_REQUEST##*/}"' >> $BASH_ENV
       - run:
-          name: "What project reponame is?"
-          command: echo ${CIRCLE_PROJECT_REPONAME}
+          name: "Print PR_NUM"
+          command: echo ${PR_NUM}
       - run:
           name: "What project username is?"
           command: echo ${CIRCLE_PROJECT_USERNAME}
