@@ -24,6 +24,9 @@ commands:
       - run:
           name: "What project username is?"
           command: echo ${CIRCLE_PROJECT_USERNAME}
+      - run:
+          name: "What circle build num is?"
+          command: echo ${CIRCLE_BUILD_NUM}
 jobs:
   check-skippable-pr:
     docker:
