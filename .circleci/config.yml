@@ -77,8 +77,18 @@ jobs:
       - image: alpine:3.7
     steps:
       - check-skippable-pr
+  test:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: "What branch am I on?"
+          command: echo ${CIRCLE_BRANCH}
 workflows:
   check-skippable:
     jobs:
       - check-skippable-pr
+      - test:
+          requires:
+            - check-skippable-pr
 
