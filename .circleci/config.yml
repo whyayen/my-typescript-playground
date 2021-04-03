@@ -70,9 +70,6 @@ jobs:
       - run:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
-      - run:
-          name: "What workflow id is?"
-          command: echo ${CIRCLE_WORKFLOW_ID}
 workflows:
   check-skippable:
     jobs:
