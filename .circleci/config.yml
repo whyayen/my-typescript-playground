@@ -53,20 +53,9 @@ commands:
             done
 
             if [[ "${cancel_running_jobs}" == 1 ]]; then
-              printf "Attempting to cancel any running jobs"
-              CIRCLE_API_BASE_URL="https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
-              AUTH_PARAMS="circle-token=${CIRCLE_TOKEN}"
-              SELF_BUILD_NUM="${CIRCLE_BUILD_NUM}"
-
-              all_jobs=$(curl --silent --show-error "${CIRCLE_API_BASE_URL}/tree/${CIRCLE_BRANCH}?${AUTH_PARAMS}")
-
-              running_jobs=$(echo "${all_jobs}" | jq "map(if .status == \"running\" or .status == \"not_running\"  then .build_num else \"None\" end) - [${SELF_BUILD_NUM}] - [\"None\"] | .[]")
-
-              for buildNum in $running_jobs; do
-                echo ${buildNum}
-                printf "Canceling ${buildNum}"
-                curl --silent --show-error --request POST "${CIRCLE_API_BASE_URL}/${buildNum}/cancel?${AUTH_PARAMS}" > /dev/null
-              done
+              curl --request POST \
+                --url https://circleci.com/api/v2/workflow/$CIRCLE_WORKFLOW_ID/cancel \
+                --header "Circle-Token: ${CIRCLE_TOKEN}"
             else
               printf "No reason to skip CI, let's go!"
             fi
