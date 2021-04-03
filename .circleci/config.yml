@@ -52,7 +52,7 @@ commands:
             if [[ "${cancel_running_jobs}" == 1 ]]; then
               curl -X POST \
                 -H "Circle-Token: ${CIRCLE_TOKEN}" \
-                --slient \
+                --silent \
                 --show-error \
                 "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
             else
