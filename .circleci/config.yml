@@ -3,7 +3,7 @@ commands:
   check-skippable-pr:
     steps:
       - run: apk add --no-cache bash curl jq
-      - run: echo ${CIRCLE_WORKFLOW_ID}
+      - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
       - run:
           shell: /bin/bash
           name: Check skippable PR
