@@ -3,10 +3,10 @@ commands:
   check-skippable-pr:
     steps:
       - run: apk add --no-cache bash curl jq
-      - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
+      - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_TOKEN}/cancel"
       - run:
           shell: /bin/bash
-          name: Get workflow info
+          name: Get workflow WT
           command: |
             curl --request GET \
               --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}" \
