@@ -8,8 +8,7 @@ commands:
           name: Get workflow WT
           command: |
             curl --request POST \
-              --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel" \
-              -u '$CIRCLE_TOKEN:'
+              --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOEKN}"
       - run:
           shell: /bin/bash
           name: Check skippable PR !!!!
