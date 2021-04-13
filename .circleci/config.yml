@@ -5,7 +5,7 @@ commands:
       - run: apk add --no-cache bash curl jq
       - run:
           shell: /bin/bash
-          name: Check skippable PR !!!!
+          name: Check skippable PR
           command: |
             required_env_vars=(
               "GITHUB_TOKEN",
