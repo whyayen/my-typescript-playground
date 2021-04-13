@@ -6,7 +6,7 @@ commands:
       - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
       - run:
           shell: /bin/bash
-          name: Get workflow
+          name: Get workflow info
           command: |
             curl --request GET \
               --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}" \
