@@ -55,15 +55,6 @@ commands:
               fi
             done
 
-            if [[ "${cancel_running_jobs}" == 1 ]]; then
-              curl -X POST https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel \
-                --header 'Content-Type: application/json' \
-                --header 'Accept: application/json' \
-                --header 'Circle-Token: $CIRCLE_TOKEN'
-            else
-              printf "No reason to skip CI, let's go!"
-            fi
-
             exit 0
 jobs:
   check-skippable-pr:
