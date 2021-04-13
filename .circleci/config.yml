@@ -56,7 +56,10 @@ commands:
             done
 
             if [[ "${cancel_running_jobs}" == 1 ]]; then
-              curl -X POST https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel -H 'Accept: application/json' -u '${CIRCLE_TOKEN}:'
+              curl -X POST https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel \
+                --header 'Content-Type: application/json' \
+                --header 'Accept: application/json' \
+                -u '${CIRCLE_TOKEN}:'
             else
               printf "No reason to skip CI, let's go!"
             fi
