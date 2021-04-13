@@ -9,7 +9,7 @@ commands:
           command: |
             curl --request POST \
               --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel" \
-              --header 'Circle-Token: $CIRCLE_TOKEN'
+              -u '$CIRCLE_TOKEN:'
       - run:
           shell: /bin/bash
           name: Check skippable PR !!!!
