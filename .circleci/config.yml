@@ -6,6 +6,14 @@ commands:
       - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
       - run:
           shell: /bin/bash
+          name: Get workflow
+          command: |
+            curl --request GET \
+              --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}" \
+              --header 'Circle-Token: $CIRCLE_TOKEN'
+
+      - run:
+          shell: /bin/bash
           name: Check skippable PR
           command: |
             required_env_vars=(
@@ -50,10 +58,8 @@ commands:
             done
 
             if [[ "${cancel_running_jobs}" == 1 ]]; then
-              curl -X POST \
-                -H "Circle-Token: ${CIRCLE_TOKEN}" \
-                --silent \
-                --show-error \
+              curl -s -X POST \
+                -H "Circle-Token: $CIRCLE_TOKEN" \
                 "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
             else
               printf "No reason to skip CI, let's go!"
