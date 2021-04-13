@@ -3,7 +3,7 @@ commands:
   check-skippable-pr:
     steps:
       - run: apk add --no-cache bash curl jq
-      - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_TOKEN}/cancel"
+      - run: echo "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel"
       - run:
           shell: /bin/bash
           name: Get workflow WT
@@ -59,6 +59,8 @@ commands:
 
             if [[ "${cancel_running_jobs}" == 1 ]]; then
               curl --request POST \
+                --header 'Content-Type: application/json' \
+                --header 'Accept: application/json' \
                 --url "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel" \
                 --header 'Circle-Token: $CIRCLE_TOKEN'
             else
